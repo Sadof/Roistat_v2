@@ -12,11 +12,10 @@ class Amo
 
     static function init($options)
     {
-
-        $amoConf = config('amo');
-        $clientId = $amoConf['clientId'];
-        $clientSecret = $amoConf['clientSecret'];
-        $redirectUri = $amoConf['redirectUri'];
+        $amo_config = include('./../config/amo.php');
+        $clientId = $amo_config['clientId'];
+        $clientSecret = $amo_config['clientSecret'];
+        $redirectUri = $amo_config['redirectUri'];
         $apiClient = null;
         try {
             $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);

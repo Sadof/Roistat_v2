@@ -1,0 +1,32 @@
+.errorInput {
+  border: 1px solid red;
+}
+.pointer {
+  cursor: pointer;
+}
+.title {
+  font-size: 30px;
+}
+.amoBtn {
+  display: block;
+  width: 160px;
+  margin: 100px auto 0;
+  background: #1b3446;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+.amoBtn:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  width: 50%;
+  margin: auto;
+}
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100%;
+  }
+}

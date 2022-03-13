@@ -70,6 +70,7 @@ export default {
       price: null,
       loading: false,
       success: false,
+      // replace for different  params
       redirect_url : "https://sadof.pythonanywhere.com",
       client_id: "6ba47c52-1b45-4bb3-bed3-b12548bd854d"
     };
@@ -109,7 +110,7 @@ export default {
             "phone" : this.phone,
             "price" : this.price,
           };
-          let response = await axios.post("/amoSendDeal", request);
+          let response = await axios.post("/api/amoSendDeal.php", new URLSearchParams(request));
           localStorage.setItem("amo_options", JSON.stringify(response.data));
           this.success = true;
           setTimeout(() => {this.success = false}, 3000);

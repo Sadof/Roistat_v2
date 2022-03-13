@@ -1,5 +1,10 @@
 {
     "require": {
         "amocrm/amocrm-api-library": "^0.7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
     }
 }

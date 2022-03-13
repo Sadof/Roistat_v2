@@ -13,23 +13,16 @@ use AmoCRM\Models\LeadModel;
 
 class AmoController 
 {
-    public function amoSendDeal(Request $request)
+    public function amoSendDeal($amo_options, $name, $email, $phone, $price)
     {
-        $data = $request->validate([
-            "amo_options" => "required",
-            "name" => "required",
-            "email" => "required|email",
-            "phone" => "required|size:11",
-            "price" => "required"
-        ]);
-        $amo_options = json_decode($data["amo_options"], true);
+        $amo_options = json_decode($amo_options, true);
         $init = Amo::init($amo_options);
         $options = $init["options"];
         $apiClient = $init["apiClient"];
         $leadsService = $apiClient->leads();
         $contactsService = $apiClient->contacts();
         $contact = new ContactModel();
-        $contact->setName($data["name"]);
+        $contact->setName($name);
         
         $contact->setCustomFieldsValues(
             (new CustomFieldsValuesCollection())
@@ -40,7 +33,7 @@ class AmoController
                             (new MultitextCustomFieldValueCollection())
                                 ->add(
                                     (new MultitextCustomFieldValueModel())
-                                        ->setValue($data['phone'])
+                                        ->setValue($phone)
                                 )
                         )
                 )
@@ -51,7 +44,7 @@ class AmoController
                             (new MultitextCustomFieldValueCollection())
                                 ->add(
                                     (new MultitextCustomFieldValueModel())
-                                        ->setValue($data['email'])
+                                        ->setValue($email)
                                 )
                         )
                 )
@@ -60,7 +53,7 @@ class AmoController
 
         $lead = new LeadModel();
         $lead->setName('Тестовый лид');
-        $lead->setPrice($data["price"]);
+        $lead->setPrice($price);
         $leed_response = $leadsService->addOne($lead);
         $call_amo_leed_id = $leed_response->getId();
         $response_contact = $contactsService->addOne($contact);
@@ -84,11 +77,11 @@ class AmoController
     public function addAmoIntegration($amo_code)
     {
 
-        $amoConf = config('amo');
+        $amoConf = include('./../config/amo.php');
         $clientId = $amoConf['clientId'];
         $clientSecret = $amoConf['clientSecret'];
         $redirectUri = $amoConf['redirectUri'];
-        $base_domain = $amoConf['base_domain'];
+        $base_domain = $amoConf['base_domain'];$amoConf = include('./../config/amo.php');
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $OAuthClient = $apiClient->getOAuthClient();
         $apiClient->setAccountBaseDomain($base_domain);
