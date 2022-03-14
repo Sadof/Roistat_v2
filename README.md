@@ -1,24 +1,33 @@
-# test1
+В корневой директории выполняем скрипты
 
-## Project setup
-```
+composer install
+
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+Для запуска фронта
+
 npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Я поднимал встроенный сервер php(делал на виндовс вначале и небыло установлено сервера, потом на линуксе не стал добавлять сайт)
 
-### Lints and fixes files
-```
-npm run lint
-```
+php -S localhost:8000
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Заходим на фронт localhost:8080
+
+Нажимаем на Подключить Амо.
+
+Заходим в Амо. Можно войти в мой аккаунт
+
+Логин: sadof91195@gmail.com
+
+Пароль: QVZmKB8s
+
+Либо зайти в ваш. Тогда надо поменять настройки в config/amo.php и src/pages/Home.vue ( redirect_url и client_id)
+
+Далее у меня идет редикт на мой старый сайт и после него, требуется заменить выделенную часть https://imgur.com/a/lR4DGiX, на localhost:8080/amo, и перейти по ссылке.
+
+Отправляем данные.
+
+В виндовс не работало проксирование запросов на бекенд, чтобы избежать cors, на linux проблем не было. 
+
+Для ускорения разработки, я оставил сохранение данных в localstorage, но их требуется хранить в базе у пользователя.
