@@ -15,7 +15,7 @@ class AmoController
 {
     public function amoSendDeal($amo_options, $name, $email, $phone, $price)
     {
-        $amo_options = json_decode($amo_options, true);
+        $amo_options = json_decode($amo_options);
         $init = Amo::init($amo_options);
         $options = $init["options"];
         $apiClient = $init["apiClient"];
@@ -77,11 +77,11 @@ class AmoController
     public function addAmoIntegration($amo_code)
     {
 
-        $amoConf = include('./../config/amo.php');
+        $amoConf = include($_SERVER['DOCUMENT_ROOT'] .'/config/amo.php');
         $clientId = $amoConf['clientId'];
         $clientSecret = $amoConf['clientSecret'];
         $redirectUri = $amoConf['redirectUri'];
-        $base_domain = $amoConf['base_domain'];$amoConf = include('./../config/amo.php');
+        $base_domain = $amoConf['base_domain'];
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $OAuthClient = $apiClient->getOAuthClient();
         $apiClient->setAccountBaseDomain($base_domain);

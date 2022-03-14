@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Request;
+require_once("../vendor/autoload.php");
 
 use App\Controllers\AmoController;
 
@@ -23,11 +23,18 @@ if ($_POST) {
     if (!isset($_POST["price"])) {
         $check = true;
     }
-    
+
     if (!$check) {
-        $amo = new AmoController();
-        $options = $amo->amoSendDeal($_POST["amo_options"], $_POST["name"], $_POST["email"], $_POST["phone"], $_POST["price"]);
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($options);
+        try {
+            $amo = new AmoController();
+            $options = $amo->amoSendDeal($_POST["amo_options"], $_POST["name"], $_POST["email"], $_POST["phone"], $_POST["price"]);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($options);
+        } catch (Exception $e) {
+            // log error
+
+            header("HTTP/1.1 403 Api error");
+            echo ("Произошла ошибка отправки");
+        }
     }
 }

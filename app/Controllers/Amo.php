@@ -9,10 +9,9 @@ use League\OAuth2\Client\Token\AccessTokenInterface;
 
 class Amo
 {
-
     static function init($options)
     {
-        $amo_config = include('./../config/amo.php');
+        $amo_config = include($_SERVER['DOCUMENT_ROOT'] .'/config/amo.php');
         $clientId = $amo_config['clientId'];
         $clientSecret = $amo_config['clientSecret'];
         $redirectUri = $amo_config['redirectUri'];
@@ -38,7 +37,6 @@ class Amo
         } catch (Exception $ex) {
             // log this somewhere
 
-            abort(403, "Ошибка при подключении Амо");
         }
         return ["apiClient" => $apiClient, "options" => $options];
     }
