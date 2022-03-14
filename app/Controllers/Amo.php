@@ -25,7 +25,7 @@ class Amo
                 ->onAccessTokenRefresh(
                     function (AccessTokenInterface $accessToken, string $baseDomain) use(&$options) {
 
-                        /// Требуется тут обновлять информацю с опцямии в базе 
+                        /// Требуется тут обновлять информацю с опцямии в базе и брать из нее опции для дальнейших инициализаций
                         $options = json_encode([
                             'access_token' => $accessToken->getToken(),
                             'refresh_token' => $accessToken->getRefreshToken(),
@@ -38,6 +38,6 @@ class Amo
             // log this somewhere
 
         }
-        return ["apiClient" => $apiClient, "options" => $options];
+        return $apiClient;
     }
 }

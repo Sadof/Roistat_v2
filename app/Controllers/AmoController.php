@@ -15,10 +15,8 @@ class AmoController
 {
     public function amoSendDeal($amo_options, $name, $email, $phone, $price)
     {
-        $amo_options = json_decode($amo_options);
-        $init = Amo::init($amo_options);
-        $options = $init["options"];
-        $apiClient = $init["apiClient"];
+        $options = json_decode($amo_options, true);
+        $apiClient = Amo::init($options);
         $leadsService = $apiClient->leads();
         $contactsService = $apiClient->contacts();
         $contact = new ContactModel();

@@ -41,7 +41,6 @@ export default {
 
         window.location.href = document.location.origin;
       } catch (err) {
-        console.log(err);
         this.error = "Ошибка соединения с Amo";
       }
     },

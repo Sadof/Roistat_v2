@@ -14,7 +14,6 @@ if ($_POST) {
             echo json_encode($options);
         } catch (Exception $e) {
             // log error
-
             header("HTTP/1.1 403 Api error");
             echo ("Произошла ошибка добавления амо");
         }
